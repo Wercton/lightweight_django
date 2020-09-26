@@ -6,13 +6,15 @@ import hashlib
 from django.conf import settings
 
 DEBUG = os.environ.get('DEBUG', 'on') == 'on'
-SECRET_KEY = os.environ.get('SECRET_KEY', os.urandom(32))
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+SECRET_KEY = os.environ.get('SECRET_KEY',
+'%jv_4#hoaqwig2gu!eg#^ozptd*a@88u(aasv7z!7xt^5(*i&k')
+#ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 BASE_DIR = os.path.dirname(__file__)
+STATIC_ROOT = 'staticfiles'
 settings.configure(
     DEBUG = DEBUG,
     SECRET_KEY = SECRET_KEY,
-    # ALLOWED_HOSTS = ALLOWED_HOSTS,
+    #ALLOWED_HOSTS = ALLOWED_HOSTS,
     ROOT_URLCONF = __name__,
     MIDDLEWARE_CLASSES = (
         'django.middleware.common.CommonMiddleware',
@@ -21,6 +23,8 @@ settings.configure(
     ),
     INSTALED_APPS=(
         'django.contrib.staticfiles',
+        'django.contrib.contenttypes',
+        'django.contrib.auth',
     ),
     TEMPLATES=[
         {
@@ -31,10 +35,11 @@ settings.configure(
             'APP_DIRS': True,
         }
     ],
-    STATICFILES_DIRS=[
-        os.path.join(BASE_DIR, 'static'),
-    ],
+    STATICFILES_DIRS=(
+        os.path.join(BASE_DIR, 'static')
+    ),
     STATIC_URL='/static/',
+    STATIC_ROOT = '',
 )
 
 # views.py ----------------------------------------------------------
